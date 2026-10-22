@@ -1,0 +1,1402 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="Aprende a resolver pequenas reparações em casa, a usar ferramentas e a ganhar autonomia prática. Formação presencial para principiantes.">
+  <title>FAZ-TUDO — A tua autonomia começa aqui</title>
+
+  <style>
+    :root {
+      --green: #173f35;
+      --green-dark: #102f28;
+      --lime: #d5f36a;
+      --cream: #f8f7f0;
+      --white: #ffffff;
+      --ink: #1c2925;
+      --muted: #66736c;
+      --line: #e3e8df;
+      --radius: 24px;
+      --shadow: 0 16px 44px rgba(23, 63, 53, .09);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 100;
+      background: white;
+      padding: 12px;
+    }
+
+    .skip-link:focus { top: 12px; }
+
+    .announcement {
+      padding: 9px 16px;
+      text-align: center;
+      background: var(--lime);
+      color: var(--green-dark);
+      font-size: .82rem;
+      font-weight: 750;
+    }
+
+    .announcement span { margin-left: 5px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248, 247, 240, .94);
+      border-bottom: 1px solid rgba(23, 63, 53, .08);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 1.12rem;
+      font-weight: 950;
+      letter-spacing: -.7px;
+      color: var(--green);
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--lime);
+      font-size: 1.25rem;
+    }
+
+    .brand small {
+      display: block;
+      font-size: .62rem;
+      line-height: 1.2;
+      letter-spacing: .5px;
+      font-weight: 650;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: .91rem;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover { color: #557d2a; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--green);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .button:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .button-lime {
+      background: var(--lime);
+      color: var(--green-dark);
+    }
+
+    .button-lime:hover { background: #c7eb51; }
+
+    .button-outline {
+      border: 1px solid rgba(255,255,255,.38);
+      background: transparent;
+      color: white;
+    }
+
+    .button-outline:hover { background: rgba(255,255,255,.1); }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      color: var(--green);
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 76px 0 68px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid #dce8cc;
+      border-radius: 999px;
+      background: #eff5e5;
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #76a735;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin: 23px 0;
+      color: var(--green);
+      font-size: clamp(2.8rem, 5.3vw, 5rem);
+      line-height: .99;
+      letter-spacing: -4px;
+      font-weight: 950;
+    }
+
+    h1 em {
+      color: #6b9636;
+      font-style: normal;
+    }
+
+    .hero-copy {
+      max-width: 540px;
+      margin-bottom: 27px;
+      color: #59675f;
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .avatar-stack {
+      display: flex;
+      padding-left: 4px;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      margin-left: -4px;
+      border: 2px solid var(--cream);
+      border-radius: 50%;
+      background: #dce8c9;
+      font-size: .85rem;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 445px;
+      padding: 25px;
+      border-radius: 34px;
+      background: #e6eddb;
+      overflow: hidden;
+    }
+
+    .art-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .25;
+      background-image: radial-gradient(#79916d 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    .art-center {
+      position: absolute;
+      inset: 36px;
+      display: grid;
+      place-items: center;
+    }
+
+    .tool-illustration {
+      width: 100%;
+      max-width: 370px;
+      filter: drop-shadow(0 22px 20px rgba(23,63,53,.12));
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border: 1px solid rgba(23,63,53,.08);
+      border-radius: 17px;
+      background: white;
+      box-shadow: var(--shadow);
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .floating-card .emoji { font-size: 1.45rem; }
+    .float-top { top: 24px; left: 18px; }
+    .float-bottom { right: 16px; bottom: 27px; }
+
+    .hero-sticker {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--green);
+      text-align: center;
+      font-size: .68rem;
+      font-weight: 950;
+      line-height: 1.15;
+      transform: rotate(9deg);
+    }
+
+    section { padding: 76px 0; }
+
+    .section-heading {
+      max-width: 680px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 14px 0;
+      color: var(--green);
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.08;
+      letter-spacing: -1.7px;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .problems { background: white; }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .problem-card {
+      min-height: 225px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .problem-icon {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 21px;
+      border-radius: 17px;
+      background: #eff5e5;
+      font-size: 1.75rem;
+    }
+
+    .problem-card h3 {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 1.05rem;
+    }
+
+    .problem-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .89rem;
+    }
+
+    .manifesto {
+      background: var(--green);
+      color: white;
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .manifesto h2 {
+      margin: 15px 0;
+      font-size: clamp(2.2rem, 4.4vw, 3.7rem);
+      line-height: 1.04;
+      letter-spacing: -2px;
+    }
+
+    .manifesto h2 em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    .manifesto-intro {
+      color: #d3e0d7;
+      max-width: 430px;
+    }
+
+    .values-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .value-check {
+      flex: 0 0 32px;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--lime);
+      color: var(--green);
+      font-weight: 950;
+    }
+
+    .value-item strong { display: block; margin-bottom: 3px; }
+    .value-item p { margin: 0; color: #d3e0d7; font-size: .9rem; }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .course-card {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .course-number {
+      display: inline-block;
+      margin-bottom: 19px;
+      color: #789c48;
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .course-card .course-icon {
+      display: block;
+      margin-bottom: 13px;
+      font-size: 1.8rem;
+    }
+
+    .course-card h3 {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 1.05rem;
+    }
+
+    .course-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .89rem;
+    }
+
+    .course-footnote {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: .87rem;
+      text-align: center;
+    }
+
+    .format-section { background: #edf1e6; }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .format-panel {
+      padding: 32px;
+      border-radius: 28px;
+      background: white;
+    }
+
+    .format-panel h2 {
+      color: var(--green);
+      font-size: 2rem;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 13px;
+      margin: 24px 0;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-row span:first-child { color: var(--muted); }
+    .detail-row strong { text-align: right; }
+
+    .price-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px;
+      border-radius: 28px;
+      background: var(--green);
+      color: white;
+    }
+
+    .price-label {
+      color: #d5e2d9;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .price {
+      margin: 8px 0;
+      color: var(--lime);
+      font-size: 3.8rem;
+      font-weight: 950;
+      letter-spacing: -3px;
+      line-height: 1.1;
+    }
+
+    .price-caption {
+      margin-bottom: 25px;
+      color: #d5e2d9;
+      font-size: .88rem;
+    }
+
+    .price-panel p:last-child { margin-bottom: 0; }
+
+    .signup { background: white; }
+
+    .signup-grid {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 54px;
+      align-items: start;
+    }
+
+    .signup-intro {
+      position: sticky;
+      top: 110px;
+    }
+
+    .signup-intro h2 {
+      margin: 15px 0;
+      color: var(--green);
+      font-size: clamp(2.1rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+    }
+
+    .signup-intro p { color: var(--muted); }
+
+    .signup-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .signup-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    .signup-point span { font-size: 1.15rem; }
+
+    .signup-form {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--cream);
+    }
+
+    .form-heading { margin-bottom: 23px; }
+
+    .form-heading h3 {
+      margin-bottom: 5px;
+      color: var(--green);
+      font-size: 1.35rem;
+    }
+
+    .form-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field-full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 13px;
+      border: 1px solid #d8dfd4;
+      border-radius: 12px;
+      outline: none;
+      background: white;
+      color: var(--ink);
+    }
+
+    .field textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #679147;
+      box-shadow: 0 0 0 3px rgba(103,145,71,.13);
+    }
+
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 20px 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .consent input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--green);
+      flex: 0 0 auto;
+    }
+
+    .consent a { color: var(--green); }
+
+    .form-submit { width: 100%; }
+
+    .form-hint {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: .77rem;
+      text-align: center;
+    }
+
+    .form-message {
+      display: none;
+      margin-top: 16px;
+      padding: 15px;
+      border: 1px solid #c6dfb1;
+      border-radius: 13px;
+      background: #eff8e8;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .form-message.visible { display: block; }
+
+    .faq { background: var(--cream); }
+
+    .faq-list {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      padding: 19px 0;
+      border-bottom: 1px solid #dce2d8;
+    }
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: var(--green);
+      font-weight: 850;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.25rem; }
+    details[open] summary::after { content: "−"; }
+
+    details p {
+      margin: 12px 25px 0 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .final-cta {
+      padding: 62px 0;
+      background: var(--lime);
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -1.7px;
+    }
+
+    .final-cta p {
+      margin-bottom: 23px;
+      color: #3e5c34;
+    }
+
+    footer {
+      padding: 30px 0;
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+    }
+
+    footer .brand { color: white; }
+    footer .brand-mark { color: var(--green); }
+    footer p { margin: 8px 0 0; color: #c7d7cc; font-size: .8rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: #e1e9e3; font-size: .84rem; }
+
+    @media (max-width: 900px) {
+      .hero-grid { gap: 25px; }
+      .hero-art { min-height: 370px; }
+      .problem-grid, .course-grid { grid-template-columns: repeat(2, 1fr); }
+      .manifesto-grid { gap: 30px; }
+      .signup-grid { gap: 28px; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(100% - 30px, 540px); }
+      .announcement { font-size: .73rem; }
+      .nav { min-height: 67px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 67px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        border-bottom: 1px solid var(--line);
+        background: var(--cream);
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links .button { width: 100%; }
+      .hero { padding: 48px 0 43px; }
+      .hero-grid, .manifesto-grid, .format-grid, .signup-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: clamp(2.8rem, 13vw, 4.2rem); letter-spacing: -2.8px; }
+      .hero-copy { font-size: 1rem; }
+      .hero-art { min-height: 340px; }
+      .art-center { inset: 43px 25px; }
+      section { padding: 58px 0; }
+      .problem-grid, .course-grid { gap: 11px; }
+      .problem-card, .course-card { padding: 17px; }
+      .problem-card { min-height: 205px; }
+      .problem-icon { width: 47px; height: 47px; margin-bottom: 14px; }
+      .manifesto-grid { gap: 25px; }
+      .format-panel, .price-panel, .signup-form { padding: 22px; }
+      .signup-intro { position: static; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field-full { grid-column: auto; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+  <div class="announcement">
+    🛠️ Está a nascer uma nova forma de aprender.
+    <span>Junta-te à lista de interessados.</span>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="FAZ-TUDO — página inicial">
+        <span class="brand-mark">✳</span>
+        <span>FAZ-TUDO<small>ESCOLA DE AUTONOMIA PRÁTICA</small></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+        <a href="#problemas">O que vais aprender</a>
+        <a href="#programa">Programa</a>
+        <a href="#perguntas">Perguntas frequentes</a>
+        <a class="button" href="#inscricao">Quero saber mais ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow-dot"></span> Para quem quer aprender fazendo</span>
+          <h1>A vida acontece.<br>Tu <em>desenrascas.</em></h1>
+          <p class="hero-copy">
+            Uma torneira a pingar. Uma prateleira por montar. Uma parede
+            com humidade. Aprende a resolver pequenos problemas do dia a dia
+            com mais confiança, sem vergonha de começar do zero.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="#inscricao">Quero ser dos primeiros ↗</a>
+            <a class="button" href="#programa"
+              style="background:transparent;color:var(--green);border:1px solid #cbd7c8">
+              Descobrir o programa
+            </a>
+          </div>
+
+          <div class="hero-note">
+            <div class="avatar-stack" aria-hidden="true">
+              <span class="avatar">👩🏻</span>
+              <span class="avatar">👨🏽</span>
+              <span class="avatar">👩🏾</span>
+            </div>
+            <span>Para principiantes. Para toda a gente. Sem julgamentos.</span>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Ilustração de ferramentas para pequenas reparações">
+          <div class="art-grid"></div>
+          <div class="hero-sticker">APRENDER<br>FAZENDO ✳</div>
+          <div class="art-center">
+            <svg class="tool-illustration" viewBox="0 0 380 340"
+              role="img" aria-label="Ilustração de ferramentas, chave inglesa e martelo">
+              <ellipse cx="192" cy="295" rx="130" ry="19" fill="#c7d5b7"/>
+              <g transform="translate(54 46) rotate(-13 65 105)">
+                <rect x="48" y="104" width="37" height="151" rx="16" fill="#d5f36a"/>
+                <rect x="57" y="113" width="19" height="126" rx="9" fill="#b3d34e"/>
+                <path d="M45 111 L39 81 L28 51 Q24 40 34 32 L58 13 L75 29 L59 46 L69 61 L91 54 L105 73 L83 95 L85 111 Z"
+                  fill="#173f35"/>
+                <path d="M40 38 L57 23 L68 33 L54 48 Z" fill="#d5f36a"/>
+              </g>
+              <g transform="translate(145 32) rotate(12 45 130)">
+                <rect x="34" y="106" width="27" height="178" rx="12" fill="#173f35"/>
+                <rect x="41" y="115" width="13" height="151" rx="6" fill="#2d6756"/>
+                <path d="M4 83 L12 34 Q15 23 27 24 L75 29 Q85 30 83 42 L77 75 L60 82 L56 51 L28 48 L24 83 Z"
+                  fill="#d5f36a"/>
+                <path d="M12 35 L75 40 L73 53 L10 48 Z" fill="#b4d64c"/>
+              </g>
+              <g transform="translate(227 84) rotate(24 45 110)">
+                <path d="M40 110 L63 110 L74 237 Q76 251 62 255 L44 257 Q31 253 33 239 Z"
+                  fill="#e2a45c"/>
+                <path d="M39 112 L62 112 L68 202 L37 202 Z" fill="#c78543"/>
+                <path d="M20 89 Q5 83 10 66 L18 31 Q21 17 36 20 L83 30 Q95 33 91 47 L81 79 Q76 93 62 90 L47 84 L43 102 L27 99 Z"
+                  fill="#173f35"/>
+                <path d="M28 32 L78 42 L74 53 L24 43 Z" fill="#d5f36a"/>
+                <path d="M20 69 L78 81 L74 92 L16 80 Z" fill="#2d6756"/>
+              </g>
+              <circle cx="307" cy="75" r="21" fill="#d5f36a"/>
+              <path d="M298 75 L305 82 L317 67" fill="none" stroke="#173f35"
+                stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M40 245 L58 227 M315 228 L332 212 M294 265 L309 265"
+                stroke="#78916d" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="floating-card float-top">
+            <span class="emoji">🔧</span>
+            <span>Menos dúvidas.<br>Mais autonomia.</span>
+          </div>
+          <div class="floating-card float-bottom">
+            <span class="emoji">🏡</span>
+            <span>A tua casa.<br>As tuas regras.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems" id="problemas">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">CONHECES ESTA SENSAÇÃO?</span>
+          <h2>Pequenos problemas.<br>Grande dor de cabeça.</h2>
+          <p>Não tens de saber tudo. Só precisas de aprender por onde começar.</p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem-card">
+            <div class="problem-icon">🚰</div>
+            <h3>A torneira não pára</h3>
+            <p>Percebe o que podes verificar e quando é altura de pedir ajuda.</p>
+          </article>
+          <article class="problem-card">
+            <div class="problem-icon">🖼️</div>
+            <h3>A prateleira está na caixa</h3>
+            <p>Conhece as ferramentas, as buchas e os cuidados antes de furar.</p>
+          </article>
+          <article class="problem-card">
+            <div class="problem-icon">🧱</div>
+            <h3>A parede tem manchas</h3>
+            <p>Aprende a identificar possíveis causas de humidade e a preparar a parede.</p>
+          </article>
+          <article class="problem-card">
+            <div class="problem-icon">🪑</div>
+            <h3>A cadeira abana</h3>
+            <p>Descobre como apertar, ajustar e prolongar a vida dos teus móveis.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto">
+      <div class="container manifesto-grid">
+        <div>
+          <span class="eyebrow">A NOSSA MANEIRA DE FAZER</span>
+          <h2>Não precisas de nascer a saber.<br><em>Podes aprender.</em></h2>
+          <p class="manifesto-intro">
+            A autonomia prática não tem género, idade ou experiência mínima.
+            É uma competência que se constrói com ferramentas na mão e espaço
+            para fazer perguntas.
+          </p>
+        </div>
+
+        <div class="values-list">
+          <div class="value-item">
+            <span class="value-check">✓</span>
+            <div>
+              <strong>Aprender fazendo</strong>
+              <p>Menos teoria complicada, mais demonstração e prática acompanhada.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <span class="value-check">✓</span>
+            <div>
+              <strong>Começar do zero é bem-vindo</strong>
+              <p>Nunca pegaste num berbequim? Ótimo. É para isso que cá estamos.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <span class="value-check">✓</span>
+            <div>
+              <strong>Um espaço para toda a gente</strong>
+              <p>Mulheres e homens, inquilinos e proprietários, curiosos e principiantes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programa">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">O PROGRAMA PILOTO</span>
+          <h2>Oito semanas para<br>ganhares confiança.</h2>
+          <p>Uma primeira proposta de formação prática, com temas úteis para o dia a dia.</p>
+        </div>
+
+        <div class="course-grid">
+          <article class="course-card">
+            <span class="course-number">SEMANA 01</span>
+            <span class="course-icon">🧰</span>
+            <h3>Ferramentas e DIY</h3>
+            <p>Ferramentas essenciais, berbequim, buchas e montagem de prateleiras.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 02</span>
+            <span class="course-icon">🚿</span>
+            <h3>Canalização básica</h3>
+            <p>Sifões, autoclismos, fugas simples e localização da torneira de segurança.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 03</span>
+            <span class="course-icon">🎨</span>
+            <h3>Paredes e humidade</h3>
+            <p>Preparação, pintura e sinais que ajudam a identificar problemas de humidade.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 04</span>
+            <span class="course-icon">🪑</span>
+            <h3>Móveis e reparações</h3>
+            <p>Dobradiças, portas, puxadores e pequenas reparações domésticas.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 05</span>
+            <span class="course-icon">⚡</span>
+            <h3>Segurança elétrica</h3>
+            <p>Quadro elétrico, prevenção de riscos e situações em que deves chamar um profissional.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 06</span>
+            <span class="course-icon">🚲</span>
+            <h3>Bicicleta</h3>
+            <p>Pressão dos pneus, corrente, travões e verificações de segurança.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 07</span>
+            <span class="course-icon">🚗</span>
+            <h3>Cuidados com o carro</h3>
+            <p>Verificações básicas, níveis, pneus, luzes e sinais de alerta.</p>
+          </article>
+          <article class="course-card">
+            <span class="course-number">SEMANA 08</span>
+            <span class="course-icon">💡</span>
+            <h3>Resolver problemas</h3>
+            <p>Aprender a avaliar uma situação, escolher os próximos passos e reconhecer limites.</p>
+          </article>
+        </div>
+
+        <p class="course-footnote">
+          Os temas e a sequência são indicativos e poderão ser ajustados em função
+          dos participantes, do espaço e das condições de segurança.
+        </p>
+      </div>
+    </section>
+
+    <section class="format-section" id="formato">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">SIMPLES E PRÁTICO</span>
+          <h2>Uma formação pensada<br>para a vida real.</h2>
+        </div>
+
+        <div class="format-grid">
+          <div class="format-panel">
+            <h2>O curso piloto</h2>
+            <p>Uma proposta inicial para um grupo pequeno, com tempo para praticar e esclarecer dúvidas.</p>
+
+            <div class="detail-list">
+              <div class="detail-row">
+                <span>Duração</span>
+                <strong>8 semanas</strong>
+              </div>
+              <div class="detail-row">
+                <span>Tempo por sessão</span>
+                <strong>2 horas</strong>
+              </div>
+              <div class="detail-row">
+                <span>Total previsto</span>
+                <strong>16 horas</strong>
+              </div>
+              <div class="detail-row">
+                <span>Tamanho do grupo</span>
+                <strong>8–12 pessoas</strong>
+              </div>
+              <div class="detail-row">
+                <span>Localização inicial</span>
+                <strong>Grande Lisboa</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-panel">
+            <div>
+              <span class="price-label">Preço indicativo do piloto</span>
+              <div class="price">179 €</div>
+              <p class="price-caption">
+                Valor proposto para o curso completo. O preço e as condições
+                serão confirmados antes de qualquer inscrição paga.
+              </p>
+            </div>
+            <div>
+              <a class="button button-lime" href="#inscricao" style="width:100%">
+                Manifestar interesse ↗
+              </a>
+              <p style="margin-top:13px;font-size:.8rem;color:#d5e2d9">
+                Sem compromisso de compra nesta fase.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="signup" id="inscricao">
+      <div class="container signup-grid">
+        <div class="signup-intro">
+          <span class="eyebrow">FAZ PARTE DO INÍCIO</span>
+          <h2>Vamos pôr mãos à obra?</h2>
+          <p>
+            Estamos a preparar o primeiro grupo. Conta-nos o que gostarias
+            de aprender para ajudar a dar forma à formação.
+          </p>
+
+          <div class="signup-points">
+            <div class="signup-point"><span>✓</span> Sem experiência prévia</div>
+            <div class="signup-point"><span>✓</span> Para mulheres e homens</div>
+            <div class="signup-point"><span>✓</span> Interesse sem compromisso</div>
+          </div>
+        </div>
+
+        <form class="signup-form" id="signupForm">
+          <div class="form-heading">
+            <h3>Lista de interessados</h3>
+            <p>Preenche os campos abaixo. Demora cerca de um minuto.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="nome">Nome *</label>
+              <input id="nome" name="nome" autocomplete="name"
+                placeholder="Como te chamas?" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" autocomplete="email"
+                placeholder="ola@exemplo.pt" required>
+            </div>
+
+            <div class="field">
+              <label for="zona">Onde te dá mais jeito? *</label>
+              <select id="zona" name="zona" required>
+                <option value="">Escolhe uma zona</option>
+                <option>Lisboa</option>
+                <option>Loures / Odivelas</option>
+                <option>Sintra / Amadora</option>
+                <option>Oeiras / Cascais</option>
+                <option>Outra zona</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="horario">Horário preferido *</label>
+              <select id="horario" name="horario" required>
+                <option value="">Escolhe um horário</option>
+                <option>Dias úteis ao final do dia</option>
+                <option>Fim de semana</option>
+                <option>Horário flexível</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="formato">O que preferes? *</label>
+              <select id="formato" name="formato" required>
+                <option value="">Escolhe uma opção</option>
+                <option>Curso completo de 8 semanas</option>
+                <option>Workshops de um só tema</option>
+                <option>Experimentar uma sessão</option>
+                <option>Ainda não sei</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="preco">Orçamento que considerarias</label>
+              <select id="preco" name="preco">
+                <option value="">Seleciona uma opção</option>
+                <option>Até 99 €</option>
+                <option>149 €</option>
+                <option>179 €</option>
+                <option>199 € ou mais</option>
+                <option>Depende do formato</option>
+              </select>
+            </div>
+
+            <div class="field field-full">
+              <label for="tema">O que gostarias mais de aprender? *</label>
+              <select id="tema" name="tema" required>
+                <option value="">Escolhe o teu tema principal</option>
+                <option>Ferramentas, furos e prateleiras</option>
+                <option>Canalização e torneiras</option>
+                <option>Humidade e pintura</option>
+                <option>Móveis e pequenas reparações</option>
+                <option>Segurança elétrica</option>
+                <option>Bicicleta ou carro</option>
+                <option>Um pouco de tudo</option>
+              </select>
+            </div>
+
+            <div class="field field-full">
+              <label for="problema">Há algum problema que gostasses de resolver?</label>
+              <textarea id="problema" name="problema"
+                placeholder="Por exemplo: tenho uma prateleira por montar há meses…"></textarea>
+            </div>
+          </div>
+
+          <label class="consent" for="consentimento">
+            <input type="checkbox" id="consentimento" name="consentimento" required>
+            <span>
+              Autorizo o contacto por email para receber informações sobre
+              o projeto FAZ-TUDO e o curso piloto. Posso retirar o meu
+              consentimento a qualquer momento. *
+            </span>
+          </label>
+
+          <button class="button form-submit" type="submit">
+            Manifestar interesse ↗
+          </button>
+
+          <p class="form-hint">
+            O envio de interesse não constitui uma reserva nem uma inscrição paga.
+          </p>
+
+          <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="faq" id="perguntas">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">BOAS PERGUNTAS</span>
+          <h2>Antes de começares.</h2>
+          <p>O essencial para perceberes se esta formação é para ti.</p>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>Preciso de saber alguma coisa antes de me inscrever?</summary>
+            <p>Não. A ideia é começar pelos fundamentos e explicar cada passo.
+              O objetivo é aprender com acompanhamento, não chegar a saber tudo.</p>
+          </details>
+
+          <details>
+            <summary>Esta formação é só para homens?</summary>
+            <p>Não. É para qualquer pessoa que queira ganhar autonomia prática.
+              Mulheres e homens são igualmente bem-vindos, independentemente da
+              experiência ou das competências que já tenham.</p>
+          </details>
+
+          <details>
+            <summary>Onde vão decorrer as sessões?</summary>
+            <p>A localização exata ainda está por definir. A primeira edição está
+              a ser pensada para a Grande Lisboa. A zona indicada no formulário
+              ajuda a escolher um local adequado.</p>
+          </details>
+
+          <details>
+            <summary>Os 179 € já são o preço final?</summary>
+            <p>Não. É um valor indicativo para testar o interesse no curso piloto.
+              O preço, as datas, o local e as condições serão comunicados antes
+              de qualquer inscrição paga.</p>
+          </details>
+
+          <details>
+            <summary>Vou aprender a fazer trabalhos elétricos ou de canalização complexos?</summary>
+            <p>A formação pretende ensinar noções básicas, prevenção e identificação
+              de problemas. Trabalhos perigosos ou regulamentados devem ser
+              avaliados e executados por profissionais devidamente qualificados.</p>
+          </details>
+
+          <details>
+            <summary>Ao preencher o formulário, fico inscrito?</summary>
+            <p>Não. Nesta fase, estás apenas a manifestar interesse. A inscrição
+              só acontecerá depois de receberes informação sobre a edição,
+              condições, datas e preço confirmados.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <h2>A tua casa. A tua confiança. As tuas regras.</h2>
+        <p>Aprender uma coisa nova pode começar com um pequeno passo.</p>
+        <a class="button" href="#inscricao">Quero fazer parte ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <a class="brand" href="#inicio">
+          <span class="brand-mark">✳</span>
+          <span>FAZ-TUDO<small>ESCOLA DE AUTONOMIA PRÁTICA</small></span>
+        </a>
+        <p>Projeto em desenvolvimento · Grande Lisboa</p>
+      </div>
+      <div class="footer-links">
+        <a href="#programa">Programa</a>
+        <a href="#inscricao">Manifestar interesse</a>
+        <a href="#perguntas">Perguntas frequentes</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Menu para telemóveis
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label",
+        isOpen ? "Fechar menu" : "Abrir menu");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Formulário: demonstração local.
+    // Para recolher respostas reais, configura um serviço de formulários
+    // e substitui este comportamento pelas instruções da secção abaixo.
+    const signupForm = document.getElementById("signupForm");
+    const formMessage = document.getElementById("formMessage");
+
+    signupForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (!signupForm.reportValidity()) return;
+
+      formMessage.textContent =
+        "Obrigado pelo teu interesse! O formulário está a funcionar em modo de demonstração: os teus dados ainda não foram enviados. O responsável pelo site terá de ligar um serviço de formulários para receber a tua resposta.";
+      formMessage.classList.add("visible");
+      formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+</body>
+</html>
